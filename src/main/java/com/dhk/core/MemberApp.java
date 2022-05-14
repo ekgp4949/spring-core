@@ -1,14 +1,12 @@
 package com.dhk.core;
 
-import com.dhk.core.member.Grade;
-import com.dhk.core.member.Member;
-import com.dhk.core.member.MemberService;
-import com.dhk.core.member.MemberServiceImpl;
+import com.dhk.core.member.*;
 
 public class MemberApp {
 
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
         Member member = new Member(1L, "memberA", Grade.VIP);
         memberService.join(member);
 
