@@ -1,14 +1,16 @@
 package com.dhk.core.singletonTest;
 
 import com.dhk.core.AppConfig;
+import com.dhk.core.member.MemberRepository;
 import com.dhk.core.member.MemberService;
-import org.assertj.core.api.Assertions;
+import com.dhk.core.member.MemberServiceImpl;
+import com.dhk.core.order.OrderServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SingletonTest {
 
@@ -42,6 +44,22 @@ public class SingletonTest {
         MemberService memberService = ac.getBean("memberService", MemberService.class);
         MemberService memberService1 = ac.getBean("memberService", MemberService.class);
         assertThat(memberService).isSameAs(memberService1);
+    }
+
+    @Test
+    @DisplayName("스프링 컨테이너 config 싱글톤 테스트")
+    void configurationSingletonTest() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+        MemberServiceImpl memberService = ac.getBean("memberService", MemberServiceImpl.class);
+        OrderServiceImpl orderService = ac.getBean("orderService", OrderServiceImpl.class);
+
+        MemberRepository memberRepository = memberService.getMemberRepository();
+        MemberRepository memberRepository1 = orderService.getMemberRepository();
+        MemberRepository memberRepository2 = ac.getBean("memberRepository", MemberRepository.class);
+
+        assertThat(memberRepository).isSameAs(memberRepository1);
+        assertThat(memberRepository).isSameAs(memberRepository2);
     }
 
 }
