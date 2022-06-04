@@ -1,8 +1,11 @@
 package com.dhk.core.member;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Component
 public class MemoryMemberRepository implements MemberRepository {
 
     // 메모리 저장소
