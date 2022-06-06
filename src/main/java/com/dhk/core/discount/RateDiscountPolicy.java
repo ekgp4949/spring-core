@@ -1,10 +1,12 @@
 package com.dhk.core.discount;
 
+import com.dhk.core.annotation.MainDiscountPolicy;
 import com.dhk.core.member.Grade;
 import com.dhk.core.member.Member;
 import org.springframework.stereotype.Component;
 
 @Component
+@MainDiscountPolicy
 public class RateDiscountPolicy implements DiscountPolicy {
     private final int discountPercent = 10;
     @Override

@@ -2,7 +2,9 @@ package com.dhk.core.discount;
 
 import com.dhk.core.member.Grade;
 import com.dhk.core.member.Member;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FixDiscountPolicy implements DiscountPolicy {
 
     private int discountfixAmount = 1000;

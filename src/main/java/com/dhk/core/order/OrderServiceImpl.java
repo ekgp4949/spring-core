@@ -1,5 +1,6 @@
 package com.dhk.core.order;
 
+import com.dhk.core.annotation.MainDiscountPolicy;
 import com.dhk.core.discount.DiscountPolicy;
 import com.dhk.core.member.Member;
 import com.dhk.core.member.MemberRepository;
@@ -14,7 +15,7 @@ public class OrderServiceImpl implements OrderService {
     private final DiscountPolicy discountPolicy;
 
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
