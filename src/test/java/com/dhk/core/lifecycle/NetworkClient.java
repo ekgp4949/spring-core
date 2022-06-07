@@ -1,9 +1,6 @@
 package com.dhk.core.lifecycle;
 
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
-
-public class NetworkClient implements InitializingBean, DisposableBean
+public class NetworkClient
 {
     private String url;
 
@@ -28,16 +25,14 @@ public class NetworkClient implements InitializingBean, DisposableBean
     }
 
     // 의존관계 주입이 끝나면 호출
-    @Override
-    public void afterPropertiesSet() throws Exception {
+    public void init() throws Exception {
         System.out.println("NetworkClient.afterPropertiesSet");
         connect();
         call("초기화 연결 메세지");
     }
 
     // 스프링 종료 전 호출
-    @Override
-    public void destroy() throws Exception {
+    public void close() throws Exception {
         System.out.println("NetworkClient.destroy");
         disconnect();
     }
